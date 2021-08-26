@@ -1,0 +1,36 @@
+{% extends 'tasks/base.html' %}
+
+{% load crispy_forms_tags %}
+            
+{% block content %}
+<section class="vh-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+
+        <div class="card mask-custom">
+          <div class="card-body p-4 text-white">
+
+          {{form|crispy}}
+
+            <form method="post">{% csrf_token %}
+     
+ 
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+            
+            
+                <button class="btn btn-danger" type="submit">Confirm</button>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+

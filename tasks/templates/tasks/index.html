@@ -1,0 +1,75 @@
+
+{% extends 'tasks/base.html' %}
+            
+{% block content %}
+<section class="vh-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+
+        <div class="card mask-custom">
+          <div class="card-body p-4 text-white">
+
+            
+
+            <table class="table text-white mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Team Member</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for t in tasks%}
+                <tr class="fw-normal">
+                  <th>
+                    <span class="ms-2">{{t.who}}</span>
+                  </th>
+                  <td class="align-middle"> 
+                    <a href="{% url 'Update-task' t.pk %}">
+                      <span >{{t.task}}</span > 
+                    </a>
+                  </td>
+                  <td class="align-middle">
+                    {% if t.priority == 'High' %}
+                    <h6 class="mb-0"><span class="badge bg-danger">{{t.priority}}</span></h6>
+                    {%elif t.priority == 'Medium' %}
+                    <h6 class="mb-0"><span class="badge bg-warning">{{t.priority}}</span></h6>
+                    {%else%}
+                    <h6 class="mb-0"><span class="badge bg-info">{{t.priority}}</span></h6>
+                    {%endif%}
+                  </td>
+                  <td class="align-middle">
+                    {% if t.status == 'New' %}
+                    <h6 class="mb-0"><span class="badge bg-danger">{{t.status}}</span></h6>
+                    {%elif t.status == 'In Progress' %}
+                    <h6 class="mb-0"><span class="badge bg-warning">{{t.status}}</span></h6>
+                    {%else%}
+                    <h6 class="mb-0"><span class="badge bg-success">{{t.status}}</span></h6>
+                    {%endif%}
+                  </td>
+                  <td class="align-middle">
+                    <a href={% url 'Delete-task' t.pk %} data-mdb-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+
+            <a href="/add"><button class="btn btn-primary">Add Task</button></a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+
